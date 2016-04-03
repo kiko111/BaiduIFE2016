@@ -71,7 +71,10 @@ function render(data) {
     var j=i+1;
     var newLi=document.createElement("li");  
     newLi.innerHTML="第"+j+"名："+data[i][0]+"，"+data[i][1];
-    document.getElementById('resort').appendChild(newLi);
+    if(document.getElementById('resort').children.length<data.length){
+        document.getElementById('resort').appendChild(newLi);
+      }
+    
   }
 
 }
