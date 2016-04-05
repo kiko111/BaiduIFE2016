@@ -88,9 +88,8 @@ function addBtnHandle() {
  * 点击各个删除按钮的时候的处理逻辑
  * 获取哪个城市数据被删，删除数据，更新表格显示
  */
-function delBtnHandle(node,dataKey) {
+function delBtnHandle(snode,dataKey) {
 	delete aqiData[dataKey];
-	//alert(JSON.stringify(aqiData));
 	renderAqiList();
 	//可以采用删除节点的方式，而不是重新渲染整个table
  	//document.getElementById('aqi-table').firstChild.removeChild(node.parentNode.parentNode);
