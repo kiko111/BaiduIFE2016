@@ -1,0 +1,42 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+    
+  </head>
+ <style>
+ .queue-ul{
+  position: relative;
+  height: 200px;
+ }
+  .queue-li{
+    list-style: none;
+    display: inline-block;
+    width: 15px;
+    position:absolute;
+    bottom: 0;
+  }
+
+  </style>
+<body>
+
+ <div>
+    <label>输入待插入数字：<input id="num-input" type="text"></label><br>
+    <div id="btns">
+      <button id="leftIn-btn" class="in left">左侧入</button>
+      <button id="rightIn-btn" class="in right">右侧入</button>
+      <button id="leftOut-btn" class="out left">左侧出</button>
+      <button id="rightOut-btn" class="out right">右侧出</button>
+    </div>
+    <button id="random-btn">随机产生</button>
+    <button id="bubble-btn">冒泡排序</button>
+    <button id="">选择排序</button>
+    <button id="">插入排序</button>
+  </div>
+  <ul id="queue-ul" class="queue-ul"> 
+  </ul>
+
+  <script src="task.js"></script>
+</body>
+</html>
