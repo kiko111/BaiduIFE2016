@@ -60,12 +60,11 @@ function renderQueue(){
 
 //渲染队列数据
 function renderQueueData(btnCla,num){
-	var classArr=btnCla.split(" ");
-	if(classArr[0]=="in"&&classArr[1]=="left"){
+	if(btnCla[0]=="in"&&btnCla[1]=="left"){
 		queueData.splice(0,0,parseInt(num));
-	}else if(classArr[0]=="in"&&classArr[1]=="right"){
+	}else if(btnCla[0]=="in"&&btnCla[1]=="right"){
 		queueData.push(parseInt(num));
-	}else if(classArr[0]=="out"&&classArr[1]=="left"){
+	}else if(btnCla[0]=="out"&&btnCla[1]=="left"){
 		queueData.splice(0,1);
 	}else{
 		queueData.splice(queueData.length-1,1);
@@ -80,8 +79,7 @@ function renderQueueData(btnCla,num){
 var btns=document.getElementsByTagName("button");
 for(var i=0,len=btns.length ;i<len;i++){
 	btns[i].addEventListener("click",function(){
-	var btnClass=this.className;
-	//console.log(btnClass);
+	var btnClass=this.classList;//html5,classList
 	var num=document.getElementById("num-input").value;
 	if(testNum(num)){
 			renderQueueData(btnClass,num);
