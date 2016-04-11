@@ -90,11 +90,26 @@ for(var i=0,len=btns.length ;i<len;i++){
   });
 }
 
+
+//删除数据
+document.getElementById("del-btn").addEventListener("click",function(){
+  queueData=[];
+  renderQueue();
+  });
+
 //随机产生序列
 document.getElementById("random-btn").addEventListener("click",function(){
   randomNum(40);
   renderQueue();
   });
+
+
+function swap(i,j,data){
+  var x=null;
+  x=data[i];
+  data[i]=data[j];
+  data[j]=x;
+}
 
 //冒泡排序
 document.getElementById("bubble-btn").addEventListener("click",function(){
@@ -117,9 +132,47 @@ document.getElementById("bubble-btn").addEventListener("click",function(){
   },10);
 });
 
-function swap(i,j,data){
-  var x=null;
-  x=data[i];
-  data[i]=data[j];
-  data[j]=x;
-}
+//选择排序
+document.getElementById("select-btn").addEventListener("click",function(){
+  var len=queueData.length;
+  var i=len-1,j=0;
+  var timer=setInterval(function(){
+    if(j>=len-1){
+      clearInterval(timer);
+      alert("排序完成");
+    }
+    if(i==j){
+      j++;
+      i=len-1;
+    }
+    if(queueData[j]>queueData[i]){
+      swap(i,j,queueData);
+    }
+    renderQueue(i);
+    i--;
+  },10);
+});
+
+
+
+
+//插入排序
+document.getElementById("insert-btn").addEventListener("click",function(){
+  var len=queueData.length;
+  var i=0,j=1;
+  var timer=setInterval(function(){
+    if(j>=len){
+      clearInterval(timer);
+      alert("排序完成");
+    }
+    if(i==j){
+      j++;
+      i=0;
+    }
+    if(queueData[j]<queueData[i]){
+      swap(i,j,queueData);
+    }
+    renderQueue(i);
+    i++;
+  },10);
+});
