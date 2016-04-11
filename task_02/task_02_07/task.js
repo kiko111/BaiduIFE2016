@@ -137,19 +137,19 @@ document.getElementById("select-btn").addEventListener("click",function(){
   var len=queueData.length;
   var i=len-1,j=0;
   var timer=setInterval(function(){
-    if(j>=len-1){
+    if(j>=len-2){
       clearInterval(timer);
       alert("排序完成");
     }
     if(i==j){
-      j++;
+      ++j;
       i=len-1;
     }
     if(queueData[j]>queueData[i]){
       swap(i,j,queueData);
     }
     renderQueue(i);
-    i--;
+    --i;
   },10);
 });
 
@@ -160,19 +160,20 @@ document.getElementById("select-btn").addEventListener("click",function(){
 document.getElementById("insert-btn").addEventListener("click",function(){
   var len=queueData.length;
   var i=0,j=1;
-  var timer=setInterval(function(){
+  var timer;
+  timer=setInterval(function(){
     if(j>=len){
       clearInterval(timer);
       alert("排序完成");
     }
     if(i==j){
-      j++;
+      ++j;
       i=0;
     }
     if(queueData[j]<queueData[i]){
       swap(i,j,queueData);
     }
     renderQueue(i);
-    i++;
+    ++i;
   },10);
 });
