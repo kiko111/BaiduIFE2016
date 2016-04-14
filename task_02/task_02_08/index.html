@@ -35,6 +35,19 @@
   </div>
 
 <script type="text/javascript">
+//跨浏览器事件处理
+var EventUtil={
+	addHandler:function(element,type,handler){
+		if(element.addEventListener){
+			element.addEventListener(type,handler,false);
+		}else if(element.attchEvent){
+			element.attchEvent("on"+type,handler);
+		}else{
+			element["on"+type]=hanlder;
+		}
+	}
+}
+
 
 var queueData=[];
 
@@ -78,26 +91,27 @@ function renderQueueData(btnCla,arr){
 		}
 	}else if(btnCla[0]=="out"&&btnCla[1]=="left"){
 		queueData.splice(0,1);
-	}else{
+	}else if(btnCla[0]=="out"&&btnCla[1]=="right"){
 		queueData.splice(queueData.length-1,1);
 	}
 	renderQueue();
 
 }
 
-var btns=document.getElementsByTagName("button");
-for(var i=0,len=btns.length ;i<len;i++){
-	btns[i].addEventListener("click",function(){
+var handlerAdd=function(){
 	var btnClass=this.classList;//html5,classList
 	var inputValue=document.getElementById("num-input").value;
 	var inputArr=dealData(inputValue);
 	renderQueueData(btnClass,inputArr);
-		
-	});
 }
 
-var searchBtn=document.getElementById("search-btn");
-searchBtn.addEventListener('click',function(){
+var btns=document.getElementsByTagName("button");
+for(var i=0,len=btns.length ;i<len;i++){
+	EventUtil.addHandler(btns[i],'click',handlerAdd);
+}
+
+
+var handlerSearch=function(){
 	var searchValue=document.getElementById("search").value;
 	if(searchValue){
 		var patt=new RegExp(searchValue);
@@ -108,7 +122,9 @@ searchBtn.addEventListener('click',function(){
 			}
 		}
 	}
-})
+}
+var searchBtn=document.getElementById("search-btn");
+EventUtil.addHandler(searchBtn,'click',handlerSearch);
 
 
 
