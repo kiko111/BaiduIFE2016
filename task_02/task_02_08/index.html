@@ -98,20 +98,21 @@ function renderQueueData(btnCla,arr){
 
 }
 
-var handlerAdd=function(){
-	var btnClass=this.classList;//html5,classList
-	var inputValue=document.getElementById("num-input").value;
-	var inputArr=dealData(inputValue);
-	renderQueueData(btnClass,inputArr);
-}
 
 var btns=document.getElementsByTagName("button");
 for(var i=0,len=btns.length ;i<len;i++){
-	EventUtil.addHandler(btns[i],'click',handlerAdd);
+	EventUtil.addHandler(btns[i],'click',function(){
+		var btnClass=this.classList;//html5,classList
+		var inputValue=document.getElementById("num-input").value;
+		var inputArr=dealData(inputValue);
+		renderQueueData(btnClass,inputArr);
+	});
 }
 
 
-var handlerSearch=function(){
+
+var searchBtn=document.getElementById("search-btn");
+EventUtil.addHandler(searchBtn,'click',function(){
 	var searchValue=document.getElementById("search").value;
 	if(searchValue){
 		var patt=new RegExp(searchValue);
@@ -122,9 +123,7 @@ var handlerSearch=function(){
 			}
 		}
 	}
-}
-var searchBtn=document.getElementById("search-btn");
-EventUtil.addHandler(searchBtn,'click',handlerSearch);
+});
 
 
 
