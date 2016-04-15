@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 20</title>
+  </head>
+  <style>
+  .queue-ul{
+  	height: 100px;
+  }
+  .queue-li{
+  	list-style: none;
+    display: inline-block;
+    /*width: 50px;*/
+    height: 30px;
+    background-color: #AD7676;
+    margin: 5px 10px;
+  }
+
+  .tags-ul{
+	height: 100px;
+  }
+  .textareas{
+  	display: block;
+  	margin-bottom: 5px;
+  	height: 70px;
+  }
+
+  </style>
+<body>
+	<label>Tag：<input id="tag-input" type="text"> </label><br>
+	<ul id="tag-list" class="tags-ul">
+	</ul>
+
+  	<textarea id="hobby-input" class="textareas"></textarea>
+  	<button id="hobbies-btn">确认兴趣爱好</button>
+   <ul id="hobby-list" class="tags-ul">
+	</ul>
+
+<script type="text/javascript">
+
+var EventUtil={
+	addHandler:function(element,type,handler){
+		if(element.addEventListener){
+			element.addEventListener(type,handler,false);
+		}else if(element.attchEvent){
+			element.attchEvent("on"+type,handler);
+		}else{
+			element["on"+type]=handler;
+		}
+	},
+	getEvent:function(event){
+		return event?event:window.event;
+	},
+	getTarget:function(event){
+		return event.target||event.srcElement;
+	}
+}
+
+var queueData=[];
+var hobbiesData=[];
+
+//数组去重
+function unique(array){
+    var reArr=[];
+        reArr[0]=array[0];
+    for(var i=1;i<array.length;i++){
+        if(array.indexOf(array[i])==i){
+            reArr.push(array[i]);
+        }
+    }
+    return reArr;
+}
+
+//输入爱好验证和处理
+function dealData(value){
+	var arr=[];
+	if(!value){
+		alert("不能为空");
+	}else{
+		arr=value.split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/);
+	}
+	console.log(arr);
+	return arr;
+}
+
+
+
+// 渲染tag队列
+function renderQueue(){
+	//alert(queueData);
+	
+	var str="";
+	for(var i=0,len=queueData.length;i<len;i++){
+		str+="<li class='queue-li'>"+queueData[i]+"</li>";
+	}
+	document.getElementById("tag-list").innerHTML=str;
+	if(queueData){
+		addMouseTags();
+		addDelTags();
+	}
+}
+//渲染hobby队列
+function renderHobbies(){
+	var str="";
+	for(var i=0,len=hobbiesData.length;i<len;i++){
+		str+="<li class='queue-li'>"+hobbiesData[i]+"</li>";
+	}
+	document.getElementById("hobby-list").innerHTML=str;
+}
+
+//tag输入
+var tags=document.getElementById("tag-input");
+EventUtil.addHandler(tags,"keyup",function(){
+	event=EventUtil.getEvent(event);
+	if(event.keyCode==13||event.keyCode==32||event.keyCode==188){
+		var inputValue=this.value;
+		var reTrim=/[,|\s|\r]/gi;
+		checkValue=inputValue.replace(reTrim,"");   
+		if(checkValue){
+			this.value=null;
+			queueData.push(checkValue);
+			queueData=unique(queueData);
+			var len=queueData.length;
+			if(len>10){
+				queueData.splice(0,len-10);
+			}
+			renderQueue();
+		}else{
+			alert("不能为空！");
+		}
+	}
+})
+//tag鼠标事件
+function addMouseTags(){
+	var li=document.getElementById("tag-list");
+	//console.log(li.childNodes.length);
+	for(var i=0,len=li.childNodes.length;i<len;i++){
+		EventUtil.addHandler(li.childNodes[i],"mouseover",function(){
+			this.style.background="red"; 
+			this.firstChild.insertData("0","点击删除");
+		});
+		EventUtil.addHandler(li.childNodes[i],"mouseleave",function(){
+			this.style.background="#AD7676"; 
+			this.firstChild.deleteData(0,4);
+		});
+
+	}
+}
+
+//强大的闭包啊，苦恼了很久，
+//删除tag
+function addDelTags(){
+	var li=document.getElementById("tag-list");
+	for(var i=0,len=li.childNodes.length;i<len;i++){
+		EventUtil.addHandler(li.childNodes[i],"click",(function(num,target){
+			return function(){
+				console.log(num);
+				console.log(queueData.length);
+				queueData.splice(num,1);
+				li.removeChild(this);
+ 			}
+		})(i,this));
+	}
+}
+
+//添加爱好
+var hobbyBtn=document.getElementById("hobbies-btn");
+EventUtil.addHandler(hobbyBtn,'click',function(){
+	var inputValue=document.getElementById("hobby-input").value;
+	hobbiesData=dealData(inputValue);
+	hobbiesData=unique(hobbiesData);
+	var len=hobbiesData.length;
+	if(len>10){
+		hobbiesData.splice(0,len-10);
+	}
+	renderHobbies();
+});
+
+</script>
+</body>
+</html>
