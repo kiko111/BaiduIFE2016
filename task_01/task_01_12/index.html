@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>css3</title>
+<style type="text/css">
+*{
+	padding: 20px;
+}
+.mydiv{
+	border: solid 1px gray;
+	display: flex;
+	flex-direction:row;
+	justify-content: space-between;
+	align-items:center;
+}
+.flex-item{
+	border:solid 1px red;
+	width:150px;
+	padding: 0;
+	margin-bottom: 10px;
+}
+.item1{
+	height: 120px;
+}
+.item2{
+	height: 100px;
+}
+.item3{
+	height: 40px;
+}
+.item4{
+	height: 200px;
+	border-color: blue
+}
+@media only screen and (max-width: 648px){
+.max-width{
+	flex-wrap:wrap;
+	align-items: flex-start;
+}
+	.item4{
+		order:-1;
+	}
+}
+@media only screen and (min-width: 648px){
+	.min-width{
+	flex-wrap:nowrap;
+
+}
+</style>
+</head>
+
+<body>
+<div class="mydiv min-width max-width">
+	<div class="flex-item item1"></div>
+	<div class="flex-item item2"></div>
+	<div class="flex-item item3"></div>
+	<div class="flex-item item4"></div>
+</div>
+
+</body>
+</html>
