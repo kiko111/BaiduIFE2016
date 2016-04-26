@@ -1,0 +1,88 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Task 22</title>
+    
+  </head>
+<style>
+.flexs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 4px 4px 4px #BECCD8;
+    border: solid 1px #8398A9;
+}
+.div1{
+    width:1000px;
+    height: 350px;
+/*    margin-bottom:30px;*/
+    margin:30px auto;
+}
+.div2{
+    width:450px;
+    height: 300px;
+    margin:0 10px;
+}
+.div3{
+    width:200px;
+    height: 250px;
+    margin:0 8px;
+}
+.div4{
+    width:80px;
+    height: 200px;
+    margin:0 5px;
+    border: solid 1px #8398A9;
+    box-shadow: 4px 4px 4px #BECCD8;
+}
+button{
+    width: 80px;
+    height: 35px;
+    background-color: #BECCD8;
+    margin: 10px 20px;
+}
+.operation{
+  text-align: center;
+}
+</style>
+<body>
+<div class="div1 flexs" id="root">
+  <div class="div2 flexs">
+    <div class="div3 flexs">
+      <div class="div4">
+      </div>
+      <div class="div4">
+      </div>
+    </div>
+    <div class="div3 flexs">
+      <div class="div4">
+      </div>
+      <div class="div4">
+      </div>
+    </div>
+  </div>
+  <div class="div2 flexs">
+    <div class="div3 flexs">
+      <div class="div4">
+      </div>
+      <div class="div4">
+      </div>
+    </div>
+    <div class="div3 flexs">
+      <div class="div4">
+      </div>
+      <div class="div4">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="traversal operation">
+  <label>选择遍历方式：</label>
+  <button id="pre-btn">前序遍历</button>
+  <button id="in-btn">中序遍历</button>
+  <button id="post-btn">后序遍历</button>
+</div>
+  <script src="task.js"></script>
+</body>
+</html>
